@@ -21,7 +21,7 @@ def pascal_triangle(n):
             else:
                 pascal_coeff *= (row - col + 1) / col
 
-            in_array.append(int(pascal_coeff))
+            in_array.append(round(pascal_coeff))
             col += 1
         pascal_list.append(in_array)
         row += 1
