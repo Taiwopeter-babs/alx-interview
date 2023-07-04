@@ -24,7 +24,7 @@ def canUnlockAll(boxes: list) -> bool:
     box_len = len(boxes)
     i = 0
 
-    if (len(boxes) == 0):
+    if (len(boxes) == 0 or len(boxes) == 1):
         return True
 
     # set the first box to True; it's already open
