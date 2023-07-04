@@ -24,6 +24,9 @@ def canUnlockAll(boxes: list) -> bool:
     box_len = len(boxes)
     i = 0
 
+    if (len(boxes) == 0):
+        return True
+
     # set the first box to True; it's already open
     box_dict[i] = True
 
