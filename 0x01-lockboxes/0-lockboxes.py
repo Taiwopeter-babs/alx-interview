@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """Implementing the lockbox algorithm"""
+from typing import List, MutableMapping
 
 
-def canUnlockAll(boxes: list) -> bool:
+def canUnlockAll(boxes: List[List[int]]) -> bool:
     """
     Checks if all boxes can be unlocked.
     The function checks each box (list), and assigns a
@@ -20,9 +21,9 @@ def canUnlockAll(boxes: list) -> bool:
         returns True, otherwise False.
 
     """
-    box_dict = {}
-    box_len = len(boxes)
-    i = 0
+    box_dict: MutableMapping[int, int] = {}
+    box_len: int = len(boxes)
+    i: int = 0
 
     if (len(boxes) == 0 or len(boxes) == 1):
         return True
@@ -36,8 +37,9 @@ def canUnlockAll(boxes: list) -> bool:
             # set each key in the box to True
             for key in boxes[i]:
                 box_dict[key] = True
-                for k in boxes[key]:
-                    box_dict[k] = True
+                if key < box_len and len(boxes[key]) > 0:
+                    for k in boxes[key]:
+                        box_dict[k] = True
 
         i += 1
 
