@@ -10,6 +10,7 @@ def minOperations(n: int) -> int:
     """
     if n <= 0 or not isinstance(n, int):
         return 0
+
     # set copy and paste keys
     allowed_keys: Dict[str, int] = {'C-A': 0, 'C-V': 0}
 
