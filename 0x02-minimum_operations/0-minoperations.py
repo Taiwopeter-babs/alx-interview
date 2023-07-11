@@ -26,8 +26,7 @@ def minOperations(n: int) -> int:
             key_count += 2
             h_chars_in_buffer = h_count
             h_count *= 2
-            # print('number of H characters === {}\t key_count = [{}]'.format(
-            #     h_count, key_count))
+
         else:
             # increase only count of 'paste' key
             allowed_keys['C-V'] += 1
