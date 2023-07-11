@@ -8,7 +8,7 @@ def minOperations(n: int) -> int:
     returns the minimum number of operations
     that will give exactly n number of characters
     """
-    if n <= 0 or not isinstance(n, int):
+    if n is None or n <= 0 or not isinstance(n, int):
         return 0
 
     # set copy and paste keys
