@@ -12,7 +12,7 @@ def minOperations(n: int) -> int:
         return 0
 
     # set copy and paste keys
-    allowed_keys: Dict[str, int] = {'C-A': 0, 'C-V': 0}
+    allowed_keys = {'C-A': 0, 'C-V': 0}
 
     key_count = 0
     h_count = 1  # number of characters currently in print
