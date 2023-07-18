@@ -49,7 +49,6 @@ def parse_log_data():
         # skip line if no adherence to format
         if not match_one.search(line) or not match_two.search(line):
             continue
-        print(line)
         try:
             line = line.replace('\n', '')
             code, file_size = line.rsplit(" ", 2)[1:]
