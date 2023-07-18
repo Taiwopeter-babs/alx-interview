@@ -44,29 +44,34 @@ def parse_log_data():
 
     count = 0
     total_size = 0
-    for line in stdin:
 
-        # skip line if no adherence to format
-        if not match_one.search(line) or not match_two.search(line):
-            continue
-        try:
+    try:
+        for line in stdin:
+            # skip line if no adherence to format
+            if not match_one.search(line) or not match_two.search(line):
+                continue
             line = line.replace('\n', '')
             code, file_size = line.rsplit(" ", 2)[1:]
             status_codes[code] += 1
             total_size += int(file_size)
 
-        except Exception:
-            pass
+            if count == 9:
+                print("File size: {}".format(total_size))
+                for key, value in sorted(status_codes.items()):
+                    if value != 0:
+                        print("{}: {}".format(key, value))
+                count = 0
+                continue  # continue to the next line
 
-        if count == 9:
-            print("File size: {}".format(total_size))
-            for key, value in sorted(status_codes.items()):
-                if value != 0:
-                    print("{}: {}".format(key, value))
-            count = 0
-            continue  # continue to the next line
+            count += 1  # increment count to begin the new line
 
-        count += 1  # increment count to begin the new line
+    except KeyboardInterrupt:
+        pass
+    finally:
+        print("File size: {}".format(total_size))
+        for key, value in sorted(status_codes.items()):
+            if value != 0:
+                print("{}: {}".format(key, value))
 
 
 if __name__ == '__main__':
