@@ -55,13 +55,8 @@ def parse_log_data():
             status_codes[code] += 1
             total_size += int(file_size)
 
-        except KeyboardInterrupt:
-            # print statistics from beginning
-            print("File size: {}".format(total_size))
-            for key, value in sorted(status_codes.items()):
-                if value != 0:
-                    print("{}: {}".format(key, value))
-            count = 0
+        except Exception:
+            pass
 
         if count == 9:
             print("File size: {}".format(total_size))
