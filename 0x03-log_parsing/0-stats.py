@@ -5,11 +5,11 @@ it. After every 10 lines or KeyBoardInterrupt Error, the statistics
 will be printed from beginning.
 
 """
-from sys import stdin
 import re
+from sys import stdin
 
 
-def parse_log_data() -> None:
+def parse_log_data():
     """
     The stdin format:
     ### <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code>
@@ -44,33 +44,36 @@ def parse_log_data() -> None:
 
     count = 0
     total_size = 0
-    while True:
+    for line in stdin:
+
+        # skip line if no adherence to format
+        if not match_one.search(line) or not match_two.search(line):
+            continue
+        print(line)
         try:
-            line = stdin.readline()
-            if not line:
-                break
-            if not match_one.search(line) or not match_two.search(line):
-                continue
             line = line.replace('\n', '')
             code, file_size = line.rsplit(" ", 2)[1:]
             status_codes[code] += 1
             total_size += int(file_size)
 
         except KeyboardInterrupt:
+            # print statistics from beginning
             print("File size: {}".format(total_size))
-            for key in status_codes:
-                if status_codes.get(key) != 0:
-                    print("{}: {}".format(key, status_codes.get(key)))
+            for key, value in sorted(status_codes.items()):
+                if value != 0:
+                    print("{}: {}".format(key, value))
             count = 0
 
         if count == 9:
             print("File size: {}".format(total_size))
-            for key in status_codes:
-                if status_codes.get(key) != 0:
-                    print("{}: {}".format(key, status_codes.get(key)))
+            for key, value in sorted(status_codes.items()):
+                if value != 0:
+                    print("{}: {}".format(key, value))
             count = 0
-        else:
-            count += 1
+            continue  # continue to the next line
+
+        count += 1  # increment count to begin the new line
 
 
-parse_log_data()
+if __name__ == '__main__':
+    parse_log_data()
