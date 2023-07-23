@@ -36,7 +36,7 @@ def parse_log_data():
 
     # define matching formats for read input
     match_one = re.compile(
-        r'[0-9.]+\s+\-\s+\[[0-9-\s+:.]+\]\s\"GET')
+        r'[0-9.\w]+\s*\-\s*\[[0-9-\s+:.]+\]\s\"GET')
 
     match_two = re.compile(
         r'\s\/projects\/260\sHTTP\/1\.1\"\s\d{3}\s[0-9]+$'
@@ -53,12 +53,13 @@ def parse_log_data():
             code, file_size = line.rsplit(" ", 2)[1:]
             status_codes[code] += 1
             total_size += int(file_size)
-
+            # show data at tenth count
             if count == 9:
                 print("File size: {}".format(total_size))
                 for key, value in sorted(status_codes.items()):
                     if value != 0:
                         print("{}: {}".format(key, value))
+                # reset the count
                 count = 0
                 continue  # continue to the next line
 
