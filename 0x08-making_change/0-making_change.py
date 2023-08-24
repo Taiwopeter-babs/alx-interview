@@ -12,8 +12,12 @@ def makeChange(coins, total):
     remainder = total
     coin_count = 0
     list_size = len(coins)
+
+    # tracks the list length
     list_track = 0
+
     coin_index = 0
+
     # sort the list in reverse - make change from largest denomination
     sorted_coin_list = sorted(coins, reverse=True)
 
