@@ -35,12 +35,12 @@ def island_recurse(grid, ver, hor, size_portion):
     # check if vertical land continues
     if grid[ver + 1][hor] == 1:
       height = island_recurse(grid, ver + 1, hor, size_portion)
-      print('height', height)
+      # print('height', height)
 
     # check if horizontal land continues
     if grid[ver][hor + 1] == 1:
       #  print('hor', hor)
         width = island_recurse(grid, ver, hor + 1, size_portion)
-        print('width', width)
+        # print('width', width)
     
     return height + width + 1      
